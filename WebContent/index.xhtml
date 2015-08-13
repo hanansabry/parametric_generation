@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Parametric Generation</title>
+	<!-- <link href="./css/styles.css" rel="stylesheet" type="text/css" /> -->
+</h:head>
+<h:body class="myBackground" style="width:100%">
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<div class="centerContent	myBackground">
+		<p:graphicImage style="" value="loading_lglogo.png" />
+	</div>
+	
+	<!-- <h:form id="form" enctype="multipart/form-data"> -->
+		<p:growl id="msgs" showDetail="true" />
+
+		<!-- <h:graphicImage library="images" name="siliconlogo.PNG"/> -->
+		
+		<p:tabView orientation="center" style="background-color:#d0e4fe;">
+			<p:tab  style="background-color:#d0e4fe; " title="Related Features">
+				<p:tabView>
+					<p:tab style="background-color:#d0e4fe; " title="Importer">
+						<div id="1"
+							style="align-content: center ; margin: 0 auto 0 auto; padding-left: 2%; padding-top: 2%">
+							<ui:include src="related_importer.xhtml" />
+						</div>
+					</p:tab>
+					
+					<p:tab style="background-color:#d0e4fe; " title="Generation">
+						<div id="1"
+							style="align-content: center; margin: 0 auto 0 auto; padding-left: 2%; padding-top: 2%">
+							<ui:include src="generation.xhtml" />
+						</div>
+					</p:tab>
+					
+					<p:tab style="background-color:#d0e4fe; " title="Mapping">
+						<div id="1"
+							style="align-content: center ; margin: 0 auto 0 auto; padding-left: 2%; padding-top: 2%">
+							<ui:include src="mapping.xhtml" />
+						</div>
+					</p:tab>
+					
+					<p:tab style="background-color:#d0e4fe; " title="Mathematical Rules">
+						<div id="1"
+							style="align-content: center ; margin: 0 auto 0 auto; padding-left: 2%; padding-top: 2%">
+							<ui:include src="math_rule.xhtml" />
+						</div>
+					</p:tab>
+				</p:tabView>
+			</p:tab>
+			
+			<p:tab style="background-color:#d0e4fe; " title="Another Tab">
+			
+			</p:tab>
+		</p:tabView>
+
+	<!-- </h:form> -->
+</h:body>
+</html>

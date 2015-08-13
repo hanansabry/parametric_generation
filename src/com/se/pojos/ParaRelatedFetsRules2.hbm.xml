@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2015 9:10:55 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.se.pojos.ParaRelatedFetsRules2" table="PARA_RELATED_FETS_RULES2">
+        <id name="id" type="big_decimal">
+            <column name="ID" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="plId" type="big_decimal">
+            <column name="PL_ID" precision="22" scale="0" />
+        </property>
+        <property name="manId" type="big_decimal">
+            <column name="MAN_ID" precision="22" scale="0" />
+        </property>
+        <property name="fetId" type="string">
+            <column name="FET_ID" length="128" />
+        </property>
+        <property name="fetColNm" type="string">
+            <column name="FET_COLNM" length="128" />
+        </property>
+        <property name="fetValId" type="string">
+            <column name="FET_VAL_ID" length="128" />
+        </property>
+        <property name="updatedFetId" type="string">
+            <column name="U_FET_ID" length="128" />
+        </property>
+        <property name="updatedFetVal" type="string">
+            <column name="U_FET_VAL" length="128" />
+        </property>
+        <property name="relation" type="string">
+            <column name="RELATION" length="128" />
+        </property>
+        <property name="insertionDate" type="date">
+            <column name="INSERTION_DATE" length="7" />
+        </property>        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<!-- <h2>Include page</h2>
+    <p>Include page blah blah lorem ipsum</p> -->
+    
+    <script src="#{resource['js:common.js']}"></script>
+    <ui:include src="dialogus.xhtml" />
+    
+	<h:form id="form1" enctype="multipart/form-data">
+		<p:growl id="done" showDetail="true" />
+
+		<!-- <p:fileUpload value="#{relatedFeaturesImporteHandler.file}" mode="simple"
+			skinSimple="true" allowTypes="/(txt)$/" /> -->
+		<h:panelGrid id="display2"
+			style="align-content: center;	margin: 0 auto 0 auto;">
+			<p:fileUpload
+				fileUploadListener="#{relatedFeaturesImporteHandler.handleFileUpload}" 
+				value="#{relatedFeaturesImporteHandler.file}"
+				process="@this" style="width: 500px;text-align: center; "
+				skinSimple="false" required="true" showButtons="false" auto="false"
+				sizeLimit="10000000000" allowTypes="/(\.|\/)(txt)$/" multiple="true"
+				dragDropSupport="true" invalidFileMessage="Please upload file .txt"
+				update="output,importID"/>
+			
+			<h:outputText id="output" value="#{relatedFeaturesImporteHandler.fileName}" style="align-content: center;	margin: 0 auto 0 auto;"/>
+
+			<br />
+			
+			<h:panelGrid id = "importer" columns="3" style="align-content: center;	margin: 0 auto 0 auto;">
+			
+				<p:commandButton id="importID" value="Import" 
+								actionListener="#{relatedFeaturesImporteHandler.importFile}" 
+								disabled="#{relatedFeaturesImporteHandler.disableImport}"
+								update="done" ajax="false"
+								onclick="PrimeFaces.monitorDownload(start, stop);">
+					<p:fileDownload value="#{relatedFeaturesImporteHandler.downloadedFile}" />		
+				</p:commandButton>
+					
+	
+				<p:splitButton value="Export" 
+							   actionListener="#{relatedFeaturesImporteHandler.exportFile}" 
+							   update="done" icon="ui-icon-gripsmall-diagonal-se" 
+							   onclick="PrimeFaces.monitorDownload(start, stop);"
+							   ajax="false">
+							   
+			        <p:menuitem value="Product Line" actionListener="#{relatedFeaturesImporteHandler.exportByPL}" update="done" icon="ui-icon-gripsmall-diagonal-se" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+			        	<p:fileDownload value="#{relatedFeaturesImporteHandler.downloadedFile}"/>
+			        </p:menuitem>
+			        
+			        <p:menuitem value="Vendor" actionListener="#{relatedFeaturesImporteHandler.exportByVendor}" update="done" ajax="false" icon="ui-icon-gripsmall-diagonal-se" onclick="PrimeFaces.monitorDownload(start, stop);">
+			        	<p:fileDownload value="#{relatedFeaturesImporteHandler.downloadedFile}"/>
+			        </p:menuitem>
+			        
+			        <p:menuitem value="Product Line / Vendor" actionListener="#{relatedFeaturesImporteHandler.exportByPlVendor}" update="done" ajax="false" icon="ui-icon-gripsmall-diagonal-se" onclick="PrimeFaces.monitorDownload(start, stop);">
+			        	<p:fileDownload value="#{relatedFeaturesImporteHandler.downloadedFile}"/>
+			        </p:menuitem>
+			        
+			        <p:fileDownload value="#{relatedFeaturesImporteHandler.downloadedFile}" />
+			    </p:splitButton>														
+				
+			</h:panelGrid>
+
+		</h:panelGrid>
+
+	</h:form>
+</ui:composition>

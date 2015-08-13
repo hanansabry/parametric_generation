@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<script src="#{resource['js:common.js']}"></script>
+    <ui:include src="dialogus.xhtml" />
+    
+	<h:form id="form2" enctype="multipart/form-data">
+		<h:panelGrid style="align-content: center;	margin: 0 auto 0 auto;">
+		<p:growl id="done" showDetail="true" />
+					
+			<p:selectManyCheckbox id="basic"
+				value="#{relatedFeatureGeneration.options}" style="align-content: center;	margin: 0 auto 0 auto;">
+				<f:selectItem itemLabel="CP File Export" itemValue="cp" itemDisabled="true"/>
+				<f:selectItem itemLabel="Vertical" itemValue="vertical" />
+			</p:selectManyCheckbox>
+			<br/>
+			
+			
+			<p:fileUpload
+				fileUploadListener="#{relatedFeatureGeneration.handleFileUpload}" 
+				value="#{relatedFeatureGeneration.file}"
+				process="@this" style="width: 500px;text-align: center; "
+				skinSimple="false" required="true" showButtons="false" auto="false"
+				sizeLimit="10000000000" allowTypes="/(\.|\/)(txt)$/" multiple="true"
+				dragDropSupport="true" invalidFileMessage="Please upload file .txt"
+				update="output"/>
+				
+			<h:outputText id="output" value="#{relatedFeatureGeneration.fileName}" style="align-content: center;	margin: 0 auto 0 auto;"/>
+				
+			<h:panelGrid id = "generate" style="align-content: center;	margin: 0 auto 0 auto;">
+			
+				<p:splitButton value="Generate" 
+							   update="done" icon="ui-icon-gripsmall-diagonal-se" 
+							   onclick="alert('You must select Generate Option');"
+							   ajax="false">
+					<p:menuitem value="Product Line" actionListener="#{relatedFeatureGeneration.generateByPl}" update="done" icon="ui-icon-gripsmall-diagonal-se" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+						<p:fileDownload value="#{relatedFeatureGeneration.downloadedFile}"/>		   
+			        </p:menuitem>
+			        
+			        <p:menuitem value="Vendor" actionListener="#{relatedFeatureGeneration.generateByVendor}" update="done" icon="ui-icon-gripsmall-diagonal-se" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+						<p:fileDownload value="#{relatedFeatureGeneration.downloadedFile}"/>		   
+			        </p:menuitem>
+			        
+			        <p:menuitem value="Product Line/Vendor" actionListener="#{relatedFeatureGeneration.generateByPlVendor}" update="done" icon="ui-icon-gripsmall-diagonal-se" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+						<p:fileDownload value="#{relatedFeatureGeneration.downloadedFile}"/>		   
+			        </p:menuitem>
+			    </p:splitButton>
+			</h:panelGrid>
+				
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

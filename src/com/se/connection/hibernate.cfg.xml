@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property> -->
+		<!-- <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property> -->
+		<!-- <property name="hibernate.connection.url">jdbc:oracle:thin:@seba-db10:1521:xlp</property> -->
+		<!-- <property name="hibernate.connection.username">automation2</property> -->
+		<!-- <property name="hibernate.connection.password">automation2</property> -->
+		<!-- <property name="hibernate.default_schema">automation2</property> -->
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="hibernate.connection.pool_size">1</property>
+		<property name="current_session_context_class">thread</property>
+		<property name="javax.persistence.validation.mode">none</property>
+		<!-- <property name="connection.autoReconnect">true</property> -->
+		<!-- <property name="show_sql">true</property> -->
+		<property name="format_sql">false</property>
+		<property name="generate_statistics">false</property>
+		<property name="use_sql_comments">false</property>
+		<!-- <property name="show_sql">false</property> -->
+		<property name="connection.autoReconnectForPools">true</property>
+		<property name="connection.is-connection-validation-required">true</property>
+		<!-- auto commit -->
+		<property name="connection.autocommit">true</property>
+		<!-- configuration pool via c3p0 -->
+		<property name="c3p0.idleConnectionTestPeriod">1000</property>
+		<property name="c3p0.initialPoolSize">1</property>
+		<property name="c3p0.maxPoolSize">1</property>
+		<property name="c3p0.maxIdleTime">1</property>
+		<property name="c3p0.maxStatements">3</property>
+		<property name="c3p0.minPoolSize">1</property>
+		<!-- Compare database mapping -->
+
+		<mapping resource="com/se/pojos/ParaMappingRelatedFets.hbm.xml" />		
+		<mapping resource="com/se/pojos/ParaRelatedFetsRules.hbm.xml" />
+		<mapping resource="com/se/pojos/ParaRelatedFetsRules2.hbm.xml" />
+		<mapping resource="com/se/pojos/MathRuleRelatedFets.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>

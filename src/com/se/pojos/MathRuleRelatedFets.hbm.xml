@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2015 9:10:55 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.se.pojos.MathRuleRelatedFets" table="MATH_RULE_RELATED_FETS">
+        <id name="id" type="big_decimal">
+            <column name="ID" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="plId" type="big_decimal">
+            <column name="PL_ID" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="idFetName" type="string">
+            <column name="ID_FET_NAME" length="512" not-null="true" />
+        </property>
+        <property name="prefix" type="string">
+            <column name="PREFIX" length="10" not-null="true" />
+        </property>
+        <property name="value" type="big_decimal">
+            <column name="VALUE" precision="22" scale="0" not-null="true" />
+        </property>
+        
+        <property name="updatedFetName" type="string">
+            <column name="UPDATED_FET_NAME" length="512" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

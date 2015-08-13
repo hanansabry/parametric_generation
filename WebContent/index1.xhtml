@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Test Tags</title>
+	<!-- <link href="./css/styles.css" rel="stylesheet" type="text/css" /> -->
+</h:head>
+<h:body>
+	
+	<h:form id="formddc" enctype="multipart/form-data">
+		<p:growl id="msgs" showDetail="true" />
+
+		<!-- <h:graphicImage library="images" name="siliconlogo.PNG"/> -->
+		<h3 style="margin-top: 0">Prepared Data</h3>
+		<p:tabView>
+			<p:tab title="Related Features">
+				<!-- <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                <h:outputText
+                    value="You can from this tab generate related features values" />
+            </h:panelGrid> -->
+				<p:tabView>
+					<p:tab title="Importer">
+						<h:panelGrid columns="2" cellpadding="10">
+							<!-- <h:outputText value="Input File" />
+		                <h:inputText value="Upload Text File"/> -->
+						</h:panelGrid>
+
+
+						<p:growl id="messages" showDetail="true" />
+
+						<p:fileUpload value="#{fileUploadView.file}" mode="simple"
+							skinSimple="true" allowTypes="/(txt)$/"/>
+
+						<p:commandButton value="Submit" ajax="false"
+							actionListener="#{fileUploadView.upload}" disabled="false" />													
+	
+						<br/><br/><br/>
+						<p:commandButton value="Import" action="#{relatedFeatureImporter.importFile}"/>
+						<p:commandButton value="Export"/>
+					</p:tab>
+
+					<p:tab title="Generation">
+						<h:panelGrid columns="2" cellpadding="10">
+							<!-- <h:outputText value="Generate CP File" /> -->
+							<h3 style="margin-top:0px">Generation Option</h3>
+							<p:selectManyCheckbox id="basic" value="#{checkboxView.selectedConsoles}">
+						        <f:selectItem itemLabel="CP File Export" itemValue="cp" />
+						        <f:selectItem itemLabel="Vertical" itemValue="vertical" />
+						    </p:selectManyCheckbox>
+						    
+						    
+						    <h3 style="margin-top:0px">Generate by</h3>
+							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+						        <p:selectOneRadio id="console" value="#{radioView.console}">
+						            <f:selectItem itemLabel="Product Line" itemValue="pl" />
+						            <f:selectItem itemLabel="Product Line/Vendor" itemValue="pl_vendor" />
+						            <f:selectItem itemLabel="Part and Vendor" itemValue="parts" />
+						        </p:selectOneRadio>
+						    </h:panelGrid>
+						    
+						    <p:fileUpload value="#{fileUploadView.file}" mode="simple"
+							skinSimple="true" allowTypes="/(txt)$/"/>
+
+							<p:commandButton value="Submit" ajax="false"
+								actionListener="#{fileUploadView.upload}" disabled="false" />
+		
+							
+							<p:commandButton value="RUN" action="#{relatedFeatureImporter.importFile}" />
+						</h:panelGrid>
+					</p:tab>
+				</p:tabView>
+			</p:tab>
+
+			<p:tab title="Another tab">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputText value="Generate CP File" />
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
+
+	</h:form>
+</h:body>
+</html>
