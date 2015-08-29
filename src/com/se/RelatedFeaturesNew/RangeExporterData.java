@@ -41,7 +41,6 @@ public class RangeExporterData extends DirectExporterData{
         }else if(fetVal.contains("to")){
         	String[] fetVals = fetVal.split("to");
         	for (String singleVal : fetVals) {
-
 				fetVal = singleVal.trim();
 			}
         }

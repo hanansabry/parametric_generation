@@ -63,12 +63,12 @@ public class MultiRelatedFeatures extends RelatedFeatures{
 				+ "  cm.get_pl_name(c.pl_id) pl,"
 				+ "  c.com_partnum ,"
 				+ "  get_man_name(c.MAN_ID) ,"
-//				+ "  get_man_code(c.MAN_ID) ,"
+				+ "  get_man_code(c.MAN_ID) ,"
 				+ "  CM.GET_FAMILY_NAME(c.family_id) ,"
 				+ "  REPLACE(c.com_desc,CHR(153),'CHAR_153_||') ,"
 				+ "  getPDF_url(c.pdf_id) ,"
-//				+ "  c.lc_state ,"
-//				+ "  c.rohs,"
+				+ "  c.lc_state ,"
+				+ "  c.rohs,"
 				+ "  IMPORTER.GET_MSTR_MASK(c.com_id),"
 				+ "  IMPORTER.GET_FAM_BY_COM_ID (c.COM_ID),"
 				+ "  IMPORTER.GET_GEN_BY_COM_ID (c.COM_ID)"
@@ -81,11 +81,11 @@ public class MultiRelatedFeatures extends RelatedFeatures{
 			String[] fetVals = fetValId.split(CONCATENATE_FET_CHAR_SEP);
 			for (int i=0; i<colNms.length; i++) {
 				query += " AND d."+colNms[i]+" = "+ fetVals[i];
-			}			
+			}
 		}
 //	}
-	if(man)
-		query += " AND c.man_id = "+manId;
-	return query;
+		if(man)
+			query += " AND c.man_id = "+manId;
+		return query;
 	}
 }

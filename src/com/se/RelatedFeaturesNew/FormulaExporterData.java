@@ -1,6 +1,15 @@
 package com.se.RelatedFeaturesNew;
 
+import java.math.BigDecimal;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import com.se.Exceptions.FormulaException;
+import com.se.common.CommonFunctions;
+import com.se.connection.SessionUtil;
+import com.se.pojos.MathRuleRelatedFets;
 
 public class FormulaExporterData extends DirectExporterData{
 	
@@ -16,12 +25,22 @@ public class FormulaExporterData extends DirectExporterData{
         		super.setGeneratedFetVal("");
         		return;
         	}
-        	for(int i=0; i<fetVal.length(); i++){
-        		if(!Character.isDigit(fetVal.charAt(i))){
-        			fetVal = fetVal.substring(0, i);
-        		}
+//        	for(int i=0; i<fetVal.length(); i++){
+//        		if(!Character.isDigit(fetVal.charAt(i))){
+//        			fetVal = fetVal.substring(0, i);
+//        		}
+//        	}
+        	
+        	//get prefix from fetvel
+        	int prefixVal = 1;
+        	char ch = fetVal.charAt(fetVal.length()-1);
+        	if(!Character.isDigit(ch)){
+        		String prefix = ch+"";
+        		prefixVal = getFormulaValue(prefix);
+        		fetVal = fetVal.substring(0, fetVal.length()-1);
         	}
-        	double fetValI = Double.parseDouble(fetVal);
+        	
+        	double fetValI = Double.parseDouble(fetVal) * prefixVal;
             if (!(updatedFetVal.contains(MULTIPLY) ^ updatedFetVal.contains(DIVIDE))) {
                 throw new FormulaException();
             } else {
@@ -54,4 +73,28 @@ public class FormulaExporterData extends DirectExporterData{
         }
         return formulaValue;
     }
+	
+	public int getFormulaValue(String formulaValue_) throws FormulaException{
+		Session session = SessionUtil.getSession();
+		Criteria cr = session.createCriteria(MathRuleRelatedFets.class);
+		try{
+			int plId = CommonFunctions.getPlId(plName);
+			cr.add(Restrictions.eq("plId", new BigDecimal(plId)));
+			cr.add(Restrictions.eq("idFetName", getFetName()));
+			cr.add(Restrictions.eq("prefix", formulaValue_));
+			cr.add(Restrictions.eq("updatedFetName", getUpdatedFetName()));
+			
+			MathRuleRelatedFets rule = (MathRuleRelatedFets)cr.uniqueResult();
+			if(rule==null){
+				throw new FormulaException();
+			}else{
+				return rule.getValue().intValue();
+			}
+		}catch(Exception ex){
+			throw new FormulaException();
+		}finally{
+			session.close();
+		}
+		
+	}
 }

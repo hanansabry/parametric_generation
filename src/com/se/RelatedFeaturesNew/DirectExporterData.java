@@ -21,9 +21,12 @@ public class DirectExporterData {
 	String plName;
 	String comPartNum;
 	String manName;
+	String manCode;
 	String family;
 	String comDesc;
 	String pdfUrl;
+	String lcState;
+	String rohs;
 	String mask;
 	String famCross;
 	String generic;

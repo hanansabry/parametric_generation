@@ -62,29 +62,7 @@ public class RuleFormulaExporterData extends FormulaExporterData{
 		return getFormulaValue(formulaValue_);		
 	}
 	
-	public int getFormulaValue(String formulaValue_) throws FormulaException{
-		Session session = SessionUtil.getSession();
-		Criteria cr = session.createCriteria(MathRuleRelatedFets.class);
-		try{
-			int plId = CommonFunctions.getPlId(plName);
-			cr.add(Restrictions.eq("plId", new BigDecimal(plId)));
-			cr.add(Restrictions.eq("idFetName", getFetName()));
-			cr.add(Restrictions.eq("prefix", formulaValue_));
-			cr.add(Restrictions.eq("updatedFetName", getUpdatedFetName()));
-			
-			MathRuleRelatedFets rule = (MathRuleRelatedFets)cr.uniqueResult();
-			if(rule==null){
-				throw new FormulaException();
-			}else{
-				return rule.getValue().intValue();
-			}
-		}catch(Exception ex){
-			throw new FormulaException();
-		}finally{
-			session.close();
-		}
-		
-	}
+	
 	
 //	public void setRules(Session session){
 //		

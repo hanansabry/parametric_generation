@@ -302,17 +302,11 @@ public class RelatedFeaturesImporteHandler {
 			PrintWriter logFile = new PrintWriter(new FileWriter(new File(SAVING_PATH+"related_fets_log.txt")));
 			logFile.println("Product Line\tVendor\tID Feature Name\tID Featuer Value\tUpdated Feature Name\tUpdated Feature Value\t"
 					+ "Relation\tLog Comment");
-			
-			
-			System.out.println("File path = " + fileName);
-			BufferedReader reader = new BufferedReader(new FileReader(new File(UPLOAD_PATH+ fileName)));
-			System.out.println("BufferedReader reader = new BufferedReader(new FileReader(new File(UPLOAD_PATH+ fileName)));");
-			String line = reader.readLine();
-			System.out.println("String line = reader.readLine();");
-			System.out.println("header of the file = "+line);
+						
+			BufferedReader reader = new BufferedReader(new FileReader(new File(UPLOAD_PATH+ fileName)));			
+			String line = reader.readLine();			
 			//check input header
 			String requiredHeader = "Product Line	Vendor	ID Featuer Name	ID Featuer Value	Updated Feature Name	Updated Feature Value	Relation";
-			System.out.println("required header = "+requiredHeader);
 			if(!requiredHeader.equalsIgnoreCase(line)){
 				doneMessage = "Wrong Header";
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error", getDoneMessage());
@@ -334,16 +328,13 @@ public class RelatedFeaturesImporteHandler {
 					// System.out.println(line);
 					String[] cols = line.split("\t");
 					plName = cols[0];
-					manName = cols[1] == null ? null : cols[1]
-							.equals("") ? null : cols[1];
+					manName = cols[1] == null ? null : cols[1].equals("") ? null : cols[1];
 					fetName = cols[2];
-					fetVal = cols[3] == null ? null : cols[3]
-							.equals("") ? null : cols[3];
+					fetVal = cols[3] == null ? null : cols[3].equals("") ? null : cols[3];
 					uFetName = cols[4];
 					uFetVal = cols[5];
 					relation = cols[6];
 
-					System.out.println("before validation rule");
 					RelatedFeatures rule = null;
 					if(relation.equals(RelatedFeatures.DIRECT)||relation.equals(RelatedFeatures.RULE_FORMULA)
 							||relation.equals(RelatedFeatures.CONSTANT_FORMULA)||relation.equals(RelatedFeatures.RANGE)){
@@ -353,12 +344,8 @@ public class RelatedFeaturesImporteHandler {
 					}else{
 						System.out.println("Wrong relation");
 						continue;
-					}
+					}										
 					
-					System.out.println("after validation rule");
-					
-					
-					System.out.println("before insert the row");
 					ParaRelatedFetsRules2 ruleRow = new ParaRelatedFetsRules2();
 					ruleRow.setPlId(new BigDecimal(rule.plId));
 					ruleRow.setManId(new BigDecimal(rule.manId));
@@ -693,6 +680,8 @@ public class RelatedFeaturesImporteHandler {
 				System.out.println(file.getFileName());
 				String fileName = file.getFileName();
 				InputStream input = file.getInputstream();
+				
+				
 				fileName = "D:\\UploadFile\\" + fileName;
 				System.out.println("File path = " + fileName);
 				OutputStream output = new FileOutputStream(new File(fileName));

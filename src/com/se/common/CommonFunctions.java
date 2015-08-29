@@ -6,6 +6,7 @@
 package com.se.common;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -332,4 +333,14 @@ public class CommonFunctions {
 	public static void main(String[] args) throws NotValidRelatedFeatureException{
 		getFetVal("Mask", 2515, 30556064);
 	}
+	
+	public static ArrayList<String> getPlFeatures(int plId, Session session) {
+        SQLQuery cr = session.createSQLQuery("SELECT fet_name FROM CM.XLP_SE_FEATURE WHERE lower(fet_name)"
+                + " not in('pin count','supplier package','product_url','family','life cycle','rohs','standard package name','vendor') "
+                + " and pl_id= " + plId + "and COL_NM is not null order by FET_EXPERTSHEETORDER asc");
+
+        @SuppressWarnings("unchecked")
+		ArrayList<String> fets = (ArrayList<String>) cr.list();
+        return fets;
+    }
 }

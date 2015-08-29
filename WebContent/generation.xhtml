@@ -13,7 +13,7 @@
 					
 			<p:selectManyCheckbox id="basic"
 				value="#{relatedFeatureGeneration.options}" style="align-content: center;	margin: 0 auto 0 auto;">
-				<f:selectItem itemLabel="CP File Export" itemValue="cp" itemDisabled="true"/>
+				<f:selectItem itemLabel="CP File Export" itemValue="cp" />
 				<f:selectItem itemLabel="Vertical" itemValue="vertical" />
 			</p:selectManyCheckbox>
 			<br/>
@@ -45,6 +45,10 @@
 			        </p:menuitem>
 			        
 			        <p:menuitem value="Product Line/Vendor" actionListener="#{relatedFeatureGeneration.generateByPlVendor}" update="done" icon="ui-icon-gripsmall-diagonal-se" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+						<p:fileDownload value="#{relatedFeatureGeneration.downloadedFile}"/>		   
+			        </p:menuitem>
+			        
+			        <p:menuitem value="PN/Vendor/PL" actionListener="#{relatedFeatureGeneration.generateByPlVendor}" update="done" icon="ui-icon-gripsmall-diagonal-se" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
 						<p:fileDownload value="#{relatedFeatureGeneration.downloadedFile}"/>		   
 			        </p:menuitem>
 			    </p:splitButton>
